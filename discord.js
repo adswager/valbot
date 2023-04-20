@@ -53,6 +53,24 @@ client.on('message', async (message) => {
       console.error(error);
       message.channel.send(`Error: Could not find stats for ${nickname}.`);
     }
+    if (command === 'shop') {
+        message.channel.send('Loading shop...');
+    
+        try {
+          const response = await axios.get('https://valorant-api.com/v1/store');
+    
+          const skins = response.data.data.featuredSkins.concat(response.data.data.skins);
+    
+          const skinStrings = skins.map((skin) => `${skin.displayName} (${skin.cost} VP)`);
+    
+          const skinMessage = skinStrings.join('\n');
+    
+          message.channel.send(`Available skins in the shop:\n${skinMessage}`);
+        } catch (error) {
+          console.error(error);
+          message.channel.send('Error: Could not load shop.');
+        }
+      }
   }
 });
 
