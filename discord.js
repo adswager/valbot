@@ -4,14 +4,19 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 
-const client = new Discord.Client();
-s
+const { Client, GatewayIntentBits } = require('discord.js')
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        // ...
+    ]
+})
 const prefix = '!';
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-
+client.on("debug", console.log)
 client.on('message', async (message) => {
 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -75,4 +80,4 @@ client.on('message', async (message) => {
 });
 
 // Log in to Discord with your client token
-client.login('your-token-goes-here');
+client.login('NOl1XdNbUdxItDlh7HEeIh7wMtqQgYc2');
